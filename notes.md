@@ -345,3 +345,125 @@ DELETE FROM <table_name> WHERE <query>;
 
 DELETE FROM users WHERE nome = 'JHON DOE';
 ```
+
+----
+##### QUERIES COM OPERADORES:
+
+A maioria das queries em um banco de dados são de consulta e as consultas é o a operação com mais variações.
+
+Para receber detalhados resultados, precisamos aprender todo o poder do
+**SELECT** em conjunto de operadores, desta maneira criaremos filtros avançados e conseguiremos atingir o resultado desejado de uma consulta facilmente.
+
+Estes são os operadores mais comuns:
+
+* **OPERADORES DE COMPRAÇÃO** (>, <, >=, <=, =): estes operadores vão filtrar dados baseados nas comparações.
+
+```sql
+SELECT * FROM employees.titles WHERE emp_np >= 11500;
+```
+
+* **OPERADORES LÓGICOS** (AND, OR NOT): Combinados com a cláusula WHERE estes operadores exercem condições para especificar uma busca:
+
+```sql
+SELECT * FROM employees.salaries WHERE salary BETWEEN 150000 AND 160000 AND from_date < '2000-01-01';
+```
+
+* **BETWEEN**: Seleção entre um intervalo.
+
+```sql
+
+-- SELECT * FROM <table_name> WHERE <column_name> BETWEEN <query>;
+
+SELECT * FROM employees.salaries WHERE salary BETWEEN 150000 AND 160000;
+```
+
+* **LIKE**: Seleção por meio de algum padrão. Necessário utilizar `%` para delimitar a sub-string desejada;
+
+```sql
+SELECT * FROM employees.employees WHERE first_name LIKE '%Par%' AND gender = 'M';
+```
+
+* **IN**: Utilizado para especificar múltiplos valores em um intervalo selecionado (restrição de valores) na condição da busca.
+
+```sql
+-- SELECT * FROM <table_name> WHERE <column_name> IN (<query_interval>)
+
+SELECT * FROM employees.dept_emp WHERE dept_no IN ("d005", "d006", "d007") LIMIT 100;
+```
+
+* **DISTINCT**: Seleciona e retorna apenas as variações de valores entre uma busca.
+
+```sql
+SELECT DISTINCT title FROM employees.titles;
+```
+
+* **ORDER BY**: ordena o resultado de uma query de forma crescente(ASC) ou decrescente(DESC) o [padrão para o retorno de uma consulta é ASC]:
+
+```SQL
+SELECT * FROM employees.salaries WHERE salary BETWEEN 150000 AND 160000 AND from_date < '2000-01-01' ORDER BY salary ASC;
+```
+
+* **LIMIT**: Limita o retorno das consultas otimizando o tempo desta busca.
+
+```SQL
+SELECT * FROM employees.salaries WHERE salary BETWEEN 140000 AND 160000 ORDER BY salary ASC LIMIT 100;
+```
+
+
+----
+##### QUERIES COM FUNÇÕES:
+
+Funções são blocos de códigos reaproveitáveis e assim como no código  podemos utilizar funções nas buscas em SQL para extrair resultados que demandam muita especificações com operadores.
+
+
+Temos diversas no SQL variando entre **`strings`**, **`numericas`** e **`datas`**, que vão nos ajudar muito nas nossas consultas e aqui estão as mais comuns:
+
+* **MAX**: Retorna o maior valor de uma coluna selecionada;
+
+```SQL
+-- SELECT MAX (<column_name>) FROM <table_name>;
+
+-- SELECT * FROM employees.salaries ORDER BY salary DESC LIMIT 1; ;
+
+SELECT MAX(salary) as max_salary FROM employees.salaries ;
+```
+
+* **MIN**: Retorna o menor valor de uma coluna selecionada;
+
+```SQL
+-- SELECT MIN (<column_name>) FROM <table_name>;
+
+--SELECT * FROM employees.salaries ORDER BY salary ASC LIMIT 1;
+
+SELECT MIN (salary) as minimal_salary FROM employees.salaries ;
+```
+
+* **COUNT**: Retorna o numero de valores que combinam com uma query;
+
+```sql
+
+-- SELECT COUNT(<column_name>) FROM <table_name> WHERE <query>;
+
+SELECT COUNT (*) as total_persons FROM employees.salaries WHERE salary >= 145000;
+
+SELECT COUNT(*) AS register_total_number FROM employees.departments;
+```
+
+* **AVG**: Retorna a média entre os valores de uma determinada coluna;
+
+```sql
+
+-- SELECT AVG(<Ccolumn_name>) FROM <table_name>;
+
+SELECT AVG (salary) as media_salario FROM employees.salaries;
+
+```
+
+* **SUM**: Retorna a soma de todos os valores de uma coluna;
+
+```sql
+-- SELECT SUM(<column_name>) FROM <table_name> <query>
+
+SELECT SUM(salary) AS sum_of_salaries FROM employees.salaries WHERE salary > 100000;
+
+```
