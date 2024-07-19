@@ -646,3 +646,99 @@ order by e.first_name;
 ```
 
 
+----
+
+
+#### AGRUPAMENTO E SUBQUERY:
+
+Agrupamentos em SQL permitem organizar dados em grupos baseados em um ou mais atributos. Isso é particularmente útil para realizar cálculos agregados, como somas, médias, contagens, mínimas e máximas, em subconjuntos de dados.
+
+Principais cláusulas:
+
+- **UNION**: É utilizado para combinar o resultado de dois ou mais **SELECTS**. As colunas **precisam ter o mesmo nome** e os resultados serão agregados em uma coluna só **sem resultados duplicados**.
+
+  Podemos selecionar mais de uma coluna por vez.
+
+
+```SQL
+-- SELECT <column_name> FROM <table_A> UNION SELECT <column_name> FROM <table_B>;
+
+SELECT dept_no AS departments FROM departments UNION SELECT dept_no FROM departments; --10 results
+
+```
+
+
+- **UNION ALL**: É utilizado para combinar o resultado entre dois ou mais **SELECTS** com a diferença de trazer itens duplicados.
+
+ ```SQL
+-- SELECT <column_name> FROM <table_A> UNION SELECT <column_name> FROM <table_B>;
+
+SELECT dept_no AS departments FROM departments
+UNION ALL
+SELECT dept_no FROM dept_emp; --10k + results
+
+```
+
+- **GROUP BY**: Serve para agruparmos colunas e checarmos quantidades de determinados elementos.
+  O intuito é agrupar em colunas um somatório de resultados do agrupamento.
+
+```sql
+-- SELECT <table_name A> COUNT(<table_column>) <alias>
+-- FROM <table_name B>
+-- GROUP BY <table_query>
+
+SELECT gender,
+COUNT(gender) AS 'employees_by_gender'
+FROM employees
+GROUP BY gender;
+
+
+SELECT title, COUNT (title) as 'employees_by_role'
+FROM titles
+GROUP BY titles.title;
+```
+
+- **HAVING**: O HAVING é semelhante ao WHERE e é utilizado para fazer filtragens porém em conjunto de **aggregate functions(SUM, AVG, GROUP BY)** pois o WHERE não pode ser usado nestes casos.
+
+```sql
+-- SELECT <table_name A> COUNT(<table_column>) <alias>
+-- FROM <table_name B>
+-- AGREGATE FN <table_query>
+-- HAVING <query>
+
+SELECT hire_date, COUNT (hire_date) as 'employees_by_hire_date'
+FROM employees
+GROUP BY employees.hire_date
+HAVING COUNT(hire_date) > 50;
+
+```
+
+
+Já as subquery são consultas aninhadas dentro de outra consulta. Elas podem ser usadas para diversos propósitos, como filtrar resultados, calcular valores intermediários, ou criar conjuntos de dados temporários para serem usados na consulta externa.
+
+```sql
+SELECT emp_no as id, first_name, last_name, (
+SELECT SUM(salary)
+FROM salaries
+WHERE employees.emp_no = salaries.emp_no
+) AS sum_of_salaries
+FROM employees
+ORDER BY emp_no DESC;
+
+```
+
+- exists
+- any
+
+----
+#### RELACIONAMENTO DE TABELAS
+
+Em SQL as tabelas podem estabelecer relações entre si e estas relações servem para a separação de responsabilidades entre as tabelas.
+
+Esta ligação entre as tabelas e são representadas pelas **Foreign Keys (FKs)** e as relações podem ser tipificadas: **Um para um(ONE TO ONE), um para muitos (ONE TO MANY) e muitos para muitos(MANY TO MANY)**
+
+- **ONT TO ONE**: Quando uma tabela possui uma conexão com outra e vice-versa;
+
+- **ONE TO MANY**: Quando uma tabela possui diversos registros em outra, porém a segunda só pode possuir uma conexão;
+
+* **MANY TO MANY**: Quando duas tabelas podem ter conexões com diversos registros entre elas;
