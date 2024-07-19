@@ -1,11 +1,12 @@
 cd
+
 ## SQL
 
-SQL é uma linguagem de banco de dados, um acrônimo de *Structured Query Linguagem* (linguagem estruturada de consulta) que nos possibilita  criar e manipular Bases de dados.
+SQL é uma linguagem de banco de dados, um acrônimo de _Structured Query Linguagem_ (linguagem estruturada de consulta) que nos possibilita criar e manipular Bases de dados.
 
 Trabalhamos com ela criando Queries (INSERT, UPDATE, SELECT) e existem pequenas variações na sintaxe de acordo com a ferramenta que gerencia o banco (MySQL, PostgreSQL, SQL Server), também chamados de `SGBD's`(Sistema gerenciador de bancos de dados).
 
------
+---
 
 ## Banco de Dados
 
@@ -15,22 +16,33 @@ Vamos criar os bancos de dados através da SQL e o SGBD vai ajudar-nos a gerenci
 
 O banco de dados possui algumas entidades fundamentais para o seu correto funcionamento, como tabelas e elas que armazenam as informações.
 
-----
+---
+
 ## Principais estruturas de banco de dados
 
 ##### Diagrama do Banco:
+
 É o projeto do banco, parte fundamental e mais avançada, que define o sucesso do projeto;
+
 ##### Banco de dados:
+
 A entidade que vai guardar todos os elementos do
 banco;
+
 ##### Tabelas:
+
 A categoria dos dados;
+
 ##### Colunas:
+
 Tipos de informações que precisamos salvar;
+
 ##### Dados:
+
 O dado final entregue pelo usuário;
 
------
+---
+
 ## CRIANDO UM BANCO DE DADOS
 
 para iniciar uma base de dados, na aplicação 'visual', inserimos a query:
@@ -63,7 +75,6 @@ Vamos primeiramente acessar o MySQL pelo terminal no diretório onde o arquivo a
 mysql -u root
 ```
 
-
 Agora devemos criar um banco, como exemplo o banco vai se chamar empresa:
 
 ```sql
@@ -82,51 +93,51 @@ Verificada a criação, selecionamos o banco usando `USE <nome>`:
 USE empresa;
 ```
 
-
 E depois utilizar o comando`source empresa` para que o banco reexecute as queries antes utilizadas para criação do banco de dados:
 
 ```sql
 source empresa.sql;
 ```
 
-----
+---
+
 ## QUERIES:
 
 #### GERENCIANDO BANCOS DE DADOS:
 
 A partir daqui vamos focar em manipular diretamente os bancos de dados via comandos:
 
-* Criação de bancos de dados:
+- Criação de bancos de dados:
 
 ```sql
 CREATE DATABASE <db_name>;
 ```
 
-* Exclusão de banco de dados:
+- Exclusão de banco de dados:
 
 ```sql
 DROP DATABASE <db_name>
 ```
 
-* Fazendo a checagem das bases de dados:
+- Fazendo a checagem das bases de dados:
 
 ```sql
 SHOW DATABASES;
 ```
 
-* Selecionando um banco:
+- Selecionando um banco:
 
 ```sql
 USE <db_name>
 ```
 
-* Importar um banco de dados (OBS: Estar com terminal no local do arquivo)
+- Importar um banco de dados (OBS: Estar com terminal no local do arquivo)
 
 ```sql
 source <db_name.sql>
 ```
 
-* Assim como importamos, podemos gerar um arquivo .sql e o exportar(OBS: star com terminal no local do arquivo )
+- Assim como importamos, podemos gerar um arquivo .sql e o exportar(OBS: star com terminal no local do arquivo )
 
 ```shell
 mysqldump -u <user> <db_name> > <file_name>.sql
@@ -135,16 +146,18 @@ mysqldump -u <user> <db_name> > <file_name>.sql
 #### GERENCIANDO TABELAS:
 
 ##### TABELAS:
+
 É a entidade responsável por guardar nossos dados Uma tabela é formada por colunas.
 
 ##### COLUNAS:
+
 As colunas são como categorias dos nossos dados: nome, profissão, idade, etc.
 
 As colunas possuem tipos de dados determinados, como: textos, números, datas e atributos: não nulo, chave primária, auto incremento;
 
-* Para criar tabelas utilizamos o comando `CREATE TABLE` seguido pelo nome da tabela e entre parênteses as colunas referentes àquela tabela, caso a tabela possua mais de 1 coluna elas devem ser separadas por vírgulas.
+- Para criar tabelas utilizamos o comando `CREATE TABLE` seguido pelo nome da tabela e entre parênteses as colunas referentes àquela tabela, caso a tabela possua mais de 1 coluna elas devem ser separadas por vírgulas.
 
-* As colunas devem possuir o nome e o tipo de dado que ela vai representar(int, float, datas, varchar, etc.) e seu limite máximo de caracteres.
+- As colunas devem possuir o nome e o tipo de dado que ela vai representar(int, float, datas, varchar, etc.) e seu limite máximo de caracteres.
 
 ```sql
 CREATE TABLE users(id number (5) , nome varcar (255))
@@ -169,8 +182,7 @@ Alguns dados também permitem limites serem definidos, como quantidade máxima d
 
 - **MEDIUMTEXT**: Aceita apenas textos com até 16777215 caracteres;
 
-
-*Exemplo:*
+_Exemplo:_
 
 ```sql
 
@@ -179,7 +191,7 @@ USE test_data_types;
 CREATE TABLE cadastro (nome VARCHAR(100), sobrenome VARCHAR (100), telefone CHAR(13), bio MEDIUMTEXT;
 ```
 
-----
+---
 
 ###### Tipos de Dados Numéricos
 
@@ -195,14 +207,14 @@ CREATE TABLE cadastro (nome VARCHAR(100), sobrenome VARCHAR (100), telefone CHAR
 
 - **FLOAT(x,y)**: armazena números de ponto flutuante com precisão de 32 bits. `x` representa o total de dígitos e `y` a quantidade de dígitos após o ponto decimal.
 
-
 ```sql
 CREATE TABLE servidores ( nome  VARCHAR(100), espaco_disco INT(10), ligado BOOL);
 
 INSERT INTO servidores (nome,espaco_disco, ligado) VALUES ( 'Dell 003', 48000, 1);
 ```
 
------
+---
+
 ###### Tipos de Dados de Data e Hora
 
 - **DATE**: armazena uma data no formato 'YYYY-MM-DD'.
@@ -218,7 +230,7 @@ CREATE TABLE aniversarios ( nome VARCHAR(155), aniversario DATE);
 lo', '2016-07-17');
 ```
 
-----
+---
 
 ###### Outros Tipos de Dados
 
@@ -233,13 +245,12 @@ lo', '2016-07-17');
 - **VARBINARY(x)**: armazena dados binários de comprimento variável de até 65535 bytes.
 
 - **BLOB**: armazena grandes quantidades de dados binários (Binary Large Objects). Existem diferentes tipos de BLOB:
-    - **TINYBLOB**: armazena até 255 bytes de dados binários.
-    - **BLOB**: armazena até 65535 bytes de dados binários.
-    - **MEDIUMBLOB**: armazena até 16777215 bytes de dados binários.
-    - **LONGBLOB**: armazena até 4294967295 bytes de dados binários.
+  - **TINYBLOB**: armazena até 255 bytes de dados binários.
+  - **BLOB**: armazena até 65535 bytes de dados binários.
+  - **MEDIUMBLOB**: armazena até 16777215 bytes de dados binários.
+  - **LONGBLOB**: armazena até 4294967295 bytes de dados binários.
 
-
-----
+---
 
 ##### INSERINDO DADOS NA TABELA:
 
@@ -255,14 +266,13 @@ Os valores precisam corresponder a ordem das colunas;
 INSERT INTO funcionarions(nome, profissao) VALUES ('Jhon do', 'Example man');
 ```
 
-
-----
+---
 
 ##### ALTERANDO DADOS DA TABELA:
 
 Há três tipos de alterações em SQL e todas elas tem em comum o comando `ALTER TABLE <table_name> <alteracao>` :
 
-* Adição de colunas (ADD COLUMN)
+- Adição de colunas (ADD COLUMN)
 
 ```sql
 
@@ -273,8 +283,7 @@ ALTER TABLE funcionarios ADD COLUMN profissao;
 INSERT INTO funcionarions(nome, profissao) VALUES ('Jhon do', 'Example man');
 ```
 
-
-* Remoção de colunas (DROP COLUM):
+- Remoção de colunas (DROP COLUM):
 
 ```sql
 
@@ -284,8 +293,7 @@ ALTER TABLE funcionarios DROP COLUMN dummy_data;
 
 ```
 
-
-* Modificar tipo da coluna (MODIFY COLUMN):
+- Modificar tipo da coluna (MODIFY COLUMN):
 
 ```sql
 
@@ -295,16 +303,16 @@ ALTER TABLE funcionarios MODIFY COLUMN dummy_data char(50);
 
 ```
 
-
 ---
+
 ##### QUERIES (SIMPLES)
 
-CRUD um acrônimo para *CREATE, READ , UPDATE, DELETE*, constituem as ações mais utilizadas para a manipulação de dados nas tabelas.
+CRUD um acrônimo para _CREATE, READ , UPDATE, DELETE_, constituem as ações mais utilizadas para a manipulação de dados nas tabelas.
 
 Toda aplicação web com banco de dados tem pelo menos uma destas operações e possivelmente todas.
 
-* **`INSERT (CREATE)`**:
-   Utilizada para inserir dados em uma coluna ou colunas. Os valores e as colunas devem ser separados por vírgula. Caso a inserção for utilizar todos os campos da tabela não é necessário a sua escrita desde que estejam na ordem  da tabela
+- **`INSERT (CREATE)`**:
+  Utilizada para inserir dados em uma coluna ou colunas. Os valores e as colunas devem ser separados por vírgula. Caso a inserção for utilizar todos os campos da tabela não é necessário a sua escrita desde que estejam na ordem da tabela
 
 ```SQL
 INSERT INTO <table> (<columns_name>) VALUES (<columns_values>);
@@ -314,9 +322,8 @@ INSERT INTO users (name VARCHAR(150), age CHAR(3), job VARCHAR(150)) VALUES ('JH
 INSERT INTO users VALUES ('JANE DOE', '35', 'SOFTWARE DEVELOPER')
 ```
 
-
-* **`SELECT (READ)`**:
-   Utilizado para leitura dos dados de determinada coluna, para selecionar as colunas, depois da query, especificar a/as colunas separadas por vírgula e caso a intenção seja recuperar uma tabela por inteiro utiliza-se o * .
+- **`SELECT (READ)`**:
+  Utilizado para leitura dos dados de determinada coluna, para selecionar as colunas, depois da query, especificar a/as colunas separadas por vírgula e caso a intenção seja recuperar uma tabela por inteiro utiliza-se o \* .
 
 ```SQL
 SELECT <column_table query> FROM <table_name>;
@@ -324,7 +331,7 @@ SELECT <column_table query> FROM <table_name>;
 SELECT * FROM users -- seleciona todas as colunas da tabela de usuarios
 ```
 
-* **`UPDATE`**:
+- **`UPDATE`**:
   Para atualizar dados vamos utilizar a instrução **UPDATE** e para especificar o registro da tabela utiliza-se o operador **WHERE**.
 
   Podemos inserir mais colunas, separando elas por vírgula;
@@ -335,7 +342,7 @@ UPDATE <tabela> SET <column = value > WHERE <condition (specify query)>;
 UPDATE users SET national_id = '01987654321' WHERE nome = 'jannet' ;
 ```
 
-* **`DELETE`**:
+- **`DELETE`**:
   Para deletar dados vamos utilizar a instrução DELETE.
 
   Lembrar sempre de utilizar o **WHERE** caso contrario, deletaremos todos os dados da coluna. A quantidade de dados removidos depende do **WHERE**;
@@ -346,7 +353,8 @@ DELETE FROM <table_name> WHERE <query>;
 DELETE FROM users WHERE nome = 'JHON DOE';
 ```
 
-----
+---
+
 ##### QUERIES COM OPERADORES:
 
 A maioria das queries em um banco de dados são de consulta e as consultas é o a operação com mais variações.
@@ -356,19 +364,19 @@ Para receber detalhados resultados, precisamos aprender todo o poder do
 
 Estes são os operadores mais comuns:
 
-* **OPERADORES DE COMPRAÇÃO** (>, <, >=, <=, =): estes operadores vão filtrar dados baseados nas comparações.
+- **OPERADORES DE COMPRAÇÃO** (>, <, >=, <=, =): estes operadores vão filtrar dados baseados nas comparações.
 
 ```sql
 SELECT * FROM employees.titles WHERE emp_np >= 11500;
 ```
 
-* **OPERADORES LÓGICOS** (AND, OR NOT): Combinados com a cláusula WHERE estes operadores exercem condições para especificar uma busca:
+- **OPERADORES LÓGICOS** (AND, OR NOT): Combinados com a cláusula WHERE estes operadores exercem condições para especificar uma busca:
 
 ```sql
 SELECT * FROM employees.salaries WHERE salary BETWEEN 150000 AND 160000 AND from_date < '2000-01-01';
 ```
 
-* **BETWEEN**: Seleção entre um intervalo.
+- **BETWEEN**: Seleção entre um intervalo.
 
 ```sql
 
@@ -377,13 +385,13 @@ SELECT * FROM employees.salaries WHERE salary BETWEEN 150000 AND 160000 AND from
 SELECT * FROM employees.salaries WHERE salary BETWEEN 150000 AND 160000;
 ```
 
-* **LIKE**: Seleção por meio de algum padrão. Necessário utilizar `%` para delimitar a sub-string desejada;
+- **LIKE**: Seleção por meio de algum padrão. Necessário utilizar `%` para delimitar a sub-string desejada;
 
 ```sql
 SELECT * FROM employees.employees WHERE first_name LIKE '%Par%' AND gender = 'M';
 ```
 
-* **IN**: Utilizado para especificar múltiplos valores em um intervalo selecionado (restrição de valores) na condição da busca.
+- **IN**: Utilizado para especificar múltiplos valores em um intervalo selecionado (restrição de valores) na condição da busca.
 
 ```sql
 -- SELECT * FROM <table_name> WHERE <column_name> IN (<query_interval>)
@@ -391,34 +399,33 @@ SELECT * FROM employees.employees WHERE first_name LIKE '%Par%' AND gender = 'M'
 SELECT * FROM employees.dept_emp WHERE dept_no IN ("d005", "d006", "d007") LIMIT 100;
 ```
 
-* **DISTINCT**: Seleciona e retorna apenas as variações de valores entre uma busca.
+- **DISTINCT**: Seleciona e retorna apenas as variações de valores entre uma busca.
 
 ```sql
 SELECT DISTINCT title FROM employees.titles;
 ```
 
-* **ORDER BY**: ordena o resultado de uma query de forma crescente(ASC) ou decrescente(DESC) o [padrão para o retorno de uma consulta é ASC]:
+- **ORDER BY**: ordena o resultado de uma query de forma crescente(ASC) ou decrescente(DESC) o [padrão para o retorno de uma consulta é ASC]:
 
 ```SQL
 SELECT * FROM employees.salaries WHERE salary BETWEEN 150000 AND 160000 AND from_date < '2000-01-01' ORDER BY salary ASC;
 ```
 
-* **LIMIT**: Limita o retorno das consultas otimizando o tempo desta busca.
+- **LIMIT**: Limita o retorno das consultas otimizando o tempo desta busca.
 
 ```SQL
 SELECT * FROM employees.salaries WHERE salary BETWEEN 140000 AND 160000 ORDER BY salary ASC LIMIT 100;
 ```
 
+---
 
-----
 ##### QUERIES COM FUNÇÕES:
 
-Funções são blocos de códigos reaproveitáveis e assim como no código  podemos utilizar funções nas buscas em SQL para extrair resultados que demandam muita especificações com operadores.
-
+Funções são blocos de códigos reaproveitáveis e assim como no código podemos utilizar funções nas buscas em SQL para extrair resultados que demandam muita especificações com operadores.
 
 Temos diversas no SQL variando entre **`strings`**, **`numericas`** e **`datas`**, que vão nos ajudar muito nas nossas consultas e aqui estão as mais comuns:
 
-* **MAX**: Retorna o maior valor de uma coluna selecionada;
+- **MAX**: Retorna o maior valor de uma coluna selecionada;
 
 ```SQL
 -- SELECT MAX (<column_name>) FROM <table_name>;
@@ -428,7 +435,7 @@ Temos diversas no SQL variando entre **`strings`**, **`numericas`** e **`datas`*
 SELECT MAX(salary) as max_salary FROM employees.salaries ;
 ```
 
-* **MIN**: Retorna o menor valor de uma coluna selecionada;
+- **MIN**: Retorna o menor valor de uma coluna selecionada;
 
 ```SQL
 -- SELECT MIN (<column_name>) FROM <table_name>;
@@ -438,7 +445,7 @@ SELECT MAX(salary) as max_salary FROM employees.salaries ;
 SELECT MIN (salary) as minimal_salary FROM employees.salaries ;
 ```
 
-* **COUNT**: Retorna o numero de valores que combinam com uma query;
+- **COUNT**: Retorna o numero de valores que combinam com uma query;
 
 ```sql
 
@@ -449,7 +456,7 @@ SELECT COUNT (*) as total_persons FROM employees.salaries WHERE salary >= 145000
 SELECT COUNT(*) AS register_total_number FROM employees.departments;
 ```
 
-* **AVG**: Retorna a média entre os valores de uma determinada coluna;
+- **AVG**: Retorna a média entre os valores de uma determinada coluna;
 
 ```sql
 
@@ -459,7 +466,7 @@ SELECT AVG (salary) as media_salario FROM employees.salaries;
 
 ```
 
-* **SUM**: Retorna a soma de todos os valores de uma coluna;
+- **SUM**: Retorna a soma de todos os valores de uma coluna;
 
 ```sql
 -- SELECT SUM(<column_name>) FROM <table_name> <query>
@@ -468,27 +475,27 @@ SELECT SUM(salary) AS sum_of_salaries FROM employees.salaries WHERE salary > 100
 
 ```
 
+---
 
-----
 #### CONSTRAINS
 
 São regras que determinam como os campos serão preenchidos.
 
 As constraints são adicionadas na criação da tabela geralmente, porém podemos alterar tabelas para adicioná-las nos ajudando a organizar e padronizar nosso projeto.
 
-* **NOT NULL**: A constraint **NOT NULL** força um valor de uma coluna específica a não ser nulo;
+- **NOT NULL**: A constraint **NOT NULL** força um valor de uma coluna específica a não ser nulo;
 
 ```sql
 CREATE TABLE pessoas (nome VARCHAR(100) NOT NULL);
 ```
 
-* **UNIQUE**: A constraint **UNIQUE** garante que todos os valores de uma coluna não serão repetidos.
+- **UNIQUE**: A constraint **UNIQUE** garante que todos os valores de uma coluna não serão repetidos.
 
 ```sql
 ALTER TABLE pessoas ADD COLUMN(email VARCHAR(100) UNIQUE);
 ```
 
-* **PRIMARY KEY**: A constraint **PRIMARY KEY** só pode ser adicionada em uma única coluna da tabela e serve como identificador único do registro na tabela, geralmente é o **`ID`**.
+- **PRIMARY KEY**: A constraint **PRIMARY KEY** só pode ser adicionada em uma única coluna da tabela e serve como identificador único do registro na tabela, geralmente é o **`ID`**.
 
 ```sql
 CREATE TABLE products (id INT NOT NULL, nome VARCHAR(150),sku VARCHAR(50),PRIMARY KEY (id));
@@ -500,7 +507,7 @@ CREATE TABLE products (id INT NOT NULL, nome VARCHAR(150),sku VARCHAR(50),PRIMAR
 ALTER TABLE constraints.products MODIFY id INT NOT NULL AUTO_INCREMENT;
 ```
 
-* **FOREGN KEY**: A **FOREIGN KEY** indica uma ligação de uma tabela a outra a partir de seu identificador. Na tabela que recebe a foregn key este identificado indica a ligação entre as tabelas.
+- **FOREGN KEY**: A **FOREIGN KEY** indica uma ligação de uma tabela a outra a partir de seu identificador. Na tabela que recebe a foregn key este identificado indica a ligação entre as tabelas.
 
 ```sql
 
@@ -524,8 +531,8 @@ INSERT INTO constraints.enderecos (rua, numero, pessoa_id) VALUES ('Rua dos bobo
 
 ```
 
-* **INDEX**: Adicionar um índice a uma coluna faz a consulta que envolva a mesma
-se tornar mais rápida. Sem o índice a consulta começa da primeira a última coluna até encontrar que você precisa, com o índice as demais serão ignoradas.
+- **INDEX**: Adicionar um índice a uma coluna faz a consulta que envolva a mesma
+  se tornar mais rápida. Sem o índice a consulta começa da primeira a última coluna até encontrar que você precisa, com o índice as demais serão ignoradas.
 
 Para a remoção do index o processo é semelhante bastando referenciar o nome do index criado e a respectiva tabela.
 
@@ -544,8 +551,7 @@ SELECT * FROM employees.employees WHERE first_name = 'John'; -- 0.071ms
 DROP INDEX employee_first_name ON employees.employees (first_name);
 ```
 
-
-----
+---
 
 #### JOINS (junção)
 
@@ -555,8 +561,8 @@ Temos então uma consulta mais complexa e com mais dados e os `JOINS` são divid
 
 **LEFT JOIN, RIGHT JOIN e INNER JOIN**
 
-*OBS¹:
-No caso do **left join** e **rigth join**, se atentar com a ordem da query pois o retorno fica em torno desta ordenação*
+_OBS¹:
+No caso do **left join** e **rigth join**, se atentar com a ordem da query pois o retorno fica em torno desta ordenação_
 
 OBS²:
 Caso queira unir mais de duas tabela, basta continuar utilizando **joins**, de maneira a complementar a primeira junção.
@@ -564,8 +570,7 @@ Caso queira unir mais de duas tabela, basta continuar utilizando **joins**, de m
 OBS³:
 É possivel utilizar filtros normalmente.
 
-
-* **INNER JOIN (Intercessão)**: Retorna registros que possuem valores correspondentes em ambas as tabelas.
+- **INNER JOIN (Intercessão)**: Retorna registros que possuem valores correspondentes em ambas as tabelas.
 
 ```sql
 
@@ -600,10 +605,7 @@ limit 150;
 
 ```
 
-
-
-
-* **LEFT JOIN (Valores da primeiro tabela + intercessão)**: Retorna todos os registros da tabela da esquerda e os registros correspondentes da tabela da direita mesmo que com dados nulos.
+- **LEFT JOIN (Valores da primeiro tabela + intercessão)**: Retorna todos os registros da tabela da esquerda e os registros correspondentes da tabela da direita mesmo que com dados nulos.
 
 ```sql
 
@@ -622,11 +624,7 @@ order by e.first_name;
 
 ```
 
-
-
-
-
-* **RIGHT JOIN (Valores da intercessão + segunda tabela) **: Retorna todos os registros da tabela da direita e os registros correspondentes da tabela da esquerda.
+- **RIGHT JOIN (Valores da intercessão + segunda tabela) **: Retorna todos os registros da tabela da direita e os registros correspondentes da tabela da esquerda.
 
 ```sql
 
@@ -645,9 +643,7 @@ order by e.first_name;
 
 ```
 
-
-----
-
+---
 
 #### AGRUPAMENTO E SUBQUERY:
 
@@ -659,7 +655,6 @@ Principais cláusulas:
 
   Podemos selecionar mais de uma coluna por vez.
 
-
 ```SQL
 -- SELECT <column_name> FROM <table_A> UNION SELECT <column_name> FROM <table_B>;
 
@@ -667,10 +662,9 @@ SELECT dept_no AS departments FROM departments UNION SELECT dept_no FROM departm
 
 ```
 
-
 - **UNION ALL**: É utilizado para combinar o resultado entre dois ou mais **SELECTS** com a diferença de trazer itens duplicados.
 
- ```SQL
+```SQL
 -- SELECT <column_name> FROM <table_A> UNION SELECT <column_name> FROM <table_B>;
 
 SELECT dept_no AS departments FROM departments
@@ -713,7 +707,6 @@ HAVING COUNT(hire_date) > 50;
 
 ```
 
-
 Já as subquery são consultas aninhadas dentro de outra consulta. Elas podem ser usadas para diversos propósitos, como filtrar resultados, calcular valores intermediários, ou criar conjuntos de dados temporários para serem usados na consulta externa.
 
 ```sql
@@ -730,7 +723,8 @@ ORDER BY emp_no DESC;
 - exists
 - any
 
-----
+---
+
 #### RELACIONAMENTO DE TABELAS
 
 Em SQL as tabelas podem estabelecer relações entre si e estas relações servem para a separação de responsabilidades entre as tabelas.
@@ -739,6 +733,134 @@ Esta ligação entre as tabelas e são representadas pelas **Foreign Keys (FKs)*
 
 - **ONT TO ONE**: Quando uma tabela possui uma conexão com outra e vice-versa;
 
-- **ONE TO MANY**: Quando uma tabela possui diversos registros em outra, porém a segunda só pode possuir uma conexão;
+```sql
+CREATE DATABASE relacoes;
 
-* **MANY TO MANY**: Quando duas tabelas podem ter conexões com diversos registros entre elas;
+use relacoes;
+
+CREATE TABLE estudantes (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+nome VARCHAR(100),
+turma VARCHAR(5)
+) ;
+
+CREATE TABLE contatos (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+telefone VARCHAR(20),
+estudante_id int not null,
+ foreign key (estudante_id) REFERENCES estudantes(id)
+) ;
+
+insert into estudantes (nome,turma) values('joao', '02501');
+insert into contatos(telefone, estudante_id) values ("21 9999-9999", 1);
+
+select e.id, e.nome, e.turma, c.telefone
+FROM estudantes as e
+JOIN contatos as c
+ON e.id = c.estudante_id;
+```
+
+- **ONE TO MANY**: Quando uma tabela possui diversos registros em outra, porém a segunda só pode possuir uma conexão.
+
+```sql
+CREATE DATABASE blog;
+
+use blog;
+
+create table usuario(
+id int primary key auto_increment not null,
+nome varchar(155) not null,
+email varchar(155) not null,
+descricao varchar (155) not null
+);
+
+create table post ( id int primary key auto_increment not null,
+title varchar(155) not null,
+descricao varchar (155) not null,
+usuario_id int not null,
+foreign key (usuario_id) references usuario(id)
+);
+```
+
+- **MANY TO MANY**: Quando duas tabelas podem ter conexões com diversos registros entre elas.
+
+  Esta relação normalmente faz uso de uma **pivot table**, uma tabela auxiliar que serve apenas para conter as relações entre tabelas.
+
+```SQL
+CREATE DATABASE relacoes;
+
+use relacoes;
+
+
+CREATE TABLE estudantes (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+nome VARCHAR(100),
+turma VARCHAR(5)
+) ;
+
+create table materias(
+id int primary key auto_increment not null,
+nome varchar(150) not null
+);
+
+
+CREATE TABLE contatos (
+id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+telefone VARCHAR(20),
+estudante_id int not null,
+ foreign key (estudante_id) REFERENCES estudantes(id)
+# );
+
+
+create table estudante_materia (
+estudante_id int not null,
+materia_id int not null,
+foreign key (estudante_id) references estudantes(id),
+foreign key (materia_id) references materias(id)
+);
+
+ select * from estudantes;
+
+insert into materias (nome) values ('Quimica');
+insert into materias (nome) values ('Fisica');
+insert into materias (nome) values ('Português');
+insert into materias (nome) values ('Matemática');
+
+select * from estudantes;
+
+use relacoes;
+
+insert into estudantes(nome, turma) values ('Pedro Celso', '2350b');
+
+insert into estudantes(nome, turma) values ('Amanda Silva', '2350b');
+
+insert into estudantes(nome, turma) values ('Liliane Woosa', '2350b');
+
+insert into estudantes(nome, turma) values ('Sammy Rose', '2350b');
+
+insert into estudante_materia (estudante_id, materia_id)
+values(1,1);
+
+insert into estudante_materia (estudante_id, materia_id)
+values(1,2);
+
+insert into estudante_materia (estudante_id, materia_id)
+values(1,3);
+
+insert into estudante_materia (estudante_id, materia_id)
+values(2,1);
+
+insert into estudante_materia (estudante_id, materia_id)
+values(2,2);
+
+insert into estudante_materia (estudante_id, materia_id)
+values(2,3);
+
+ select * from estudante_materia ;
+
+SELECT estudantes.*, materias.nome
+FROM estudantes
+JOIN estudante_materia ON estudante_materia.estudante_id = estudantes.id
+JOIN materias ON materias.id = estudante_materia.materia_id;
+
+```
